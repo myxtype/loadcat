@@ -7,8 +7,8 @@ import (
 	"path/filepath"
 	"sync"
 
-	"github.com/hjr265/loadcat/cfg"
-	"github.com/hjr265/loadcat/data"
+	"../cfg"
+	"../data"
 )
 
 type Feline struct {
