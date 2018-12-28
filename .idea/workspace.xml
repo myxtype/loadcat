@@ -2,13 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="aa682fba-3d35-4896-b118-d2f0fe54ac78" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmd/loadcatd/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/loadcatd/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/feline/driver.go" beforeDir="false" afterPath="$PROJECT_DIR$/feline/driver.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/feline/feline.go" beforeDir="false" afterPath="$PROJECT_DIR$/feline/feline.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/feline/nginx/nginx.go" beforeDir="false" afterPath="$PROJECT_DIR$/feline/nginx/nginx.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/balancers.go" beforeDir="false" afterPath="$PROJECT_DIR$/ui/balancers.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/servers.go" beforeDir="false" afterPath="$PROJECT_DIR$/ui/servers.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,10 +14,10 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/feline/nginx/nginx.go">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="304">
-              <caret line="16" column="11" selection-start-line="16" selection-start-column="11" selection-end-line="16" selection-end-column="11" />
+            <state>
+              <caret column="5" selection-start-column="5" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -57,6 +52,8 @@
         <option value="$PROJECT_DIR$/feline/feline.go" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/feline/nginx/nginx.go" />
+        <option value="$PROJECT_DIR$/ui/templates/layout.html" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -77,17 +74,6 @@
             <path>
               <item name="loadcat" type="b2602c69:ProjectViewProjectNode" />
               <item name="loadcat" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="loadcat" type="b2602c69:ProjectViewProjectNode" />
-              <item name="loadcat" type="462c0819:PsiDirectoryNode" />
-              <item name="feline" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="loadcat" type="b2602c69:ProjectViewProjectNode" />
-              <item name="loadcat" type="462c0819:PsiDirectoryNode" />
-              <item name="feline" type="462c0819:PsiDirectoryNode" />
-              <item name="nginx" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -150,13 +136,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1435">
           <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ui/templates/layout.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
         </state>
       </provider>
     </entry>
@@ -294,8 +273,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/feline/nginx/nginx.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="16" column="11" selection-start-line="16" selection-start-column="11" selection-end-line="16" selection-end-column="11" />
+        <state relative-caret-position="2004">
+          <caret line="112" column="26" selection-start-line="112" selection-start-column="22" selection-end-line="112" selection-end-column="26" />
+          <folding>
+            <element signature="e#76#230#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ui/templates/layout.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="5" selection-start-column="5" selection-end-column="5" />
         </state>
       </provider>
     </entry>
