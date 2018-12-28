@@ -10,12 +10,12 @@ import (
 	"os/signal"
 	"path/filepath"
 
-	"../api"
-	"../cfg"
-	"../data"
-	"../feline"
-	_ "../feline/nginx"
-	"../ui"
+	"../../api"
+	"../../cfg"
+	"../../data"
+	"../../feline"
+	_ "../../feline/nginx"
+	"../../ui"
 )
 
 func main() {
