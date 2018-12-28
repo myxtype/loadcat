@@ -1,22 +1,22 @@
 {{define "breadcrumb"}}
-	<li><a href="/balancers">Balancers</a></li>
+	<li><a href="/balancers">均衡器</a></li>
 	<li class="active">{{.Balancer.Label}}</li>
 {{end}}
 
 {{define "content"}}
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			Servers
+			服务器
 		</div>
 		<div class="panel-body">
 			<table class="table">
 				<thead>
 					<tr>
-						<th>Server</th>
-						<th>Address</th>
-						<th>Weight</th>
-						<th>Availability</th>
-						<th>Status</th>
+						<th>服务器</th>
+						<th>地址</th>
+						<th>权重</th>
+						<th>可用性</th>
+						<th>状态</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -35,7 +35,7 @@
 			</table>
 			<br>
 			<div>
-				<a href="/balancers/{{.Balancer.Id.Hex}}/servers/new" class="btn btn-primary btn-xs">New Server</a>
+				<a href="/balancers/{{.Balancer.Id.Hex}}/servers/new" class="btn btn-primary btn-xs">新建服务器</a>
 			</div>
 		</div>
 	</div>
@@ -44,38 +44,38 @@
 {{define "sidebar"}}
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			Balancer: {{.Balancer.Label}}
+			均衡器: {{.Balancer.Label}}
 		</div>
 		<div class="panel-body">
 			<dl>
-				<dt>Hostname</dt>
+				<dt>主机名</dt>
 				<dd>{{.Balancer.Settings.Hostname}}</dd>
 			</dl>
 			<dl>
-				<dt>Port</dt>
+				<dt>端口</dt>
 				<dd>{{.Balancer.Settings.Port}}</dd>
 			</dl>
 			<dl>
-				<dt>Protocol</dt>
+				<dt>协议</dt>
 				<dd>{{.Balancer.Settings.Protocol.Label}}</dd>
 			</dl>
 			<dl>
-				<dt>Algorithm</dt>
+				<dt>算法</dt>
 				<dd>{{.Balancer.Settings.Algorithm.Label}}</dd>
 			</dl>
 			<hr>
-			<a href="/balancers/{{.Balancer.Id.Hex}}/edit" class="btn btn-primary btn-xs">Edit</a>
+			<a href="/balancers/{{.Balancer.Id.Hex}}/edit" class="btn btn-primary btn-xs">编辑</a>
 		</div>
 	</div>
 
 	{{if eq .Balancer.Settings.Protocol "https"}}
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				SSL Settings
+				设置SSL
 			</div>
 			<div class="panel-body">
 				<dl>
-					<dt>DNS Names</dt>
+					<dt>DNS</dt>
 					<dd>
 						{{range $i, $name := .Balancer.Settings.SSLOptions.DNSNames}}
 							{{$name}},
@@ -83,7 +83,7 @@
 					</dd>
 				</dl>
 				<dl>
-					<dt>Fingerprint</dt>
+					<dt>指纹</dt>
 					<dd>{{printf "% x" .Balancer.Settings.SSLOptions.Fingerprint}}</dd>
 				</dl>
 			</div>

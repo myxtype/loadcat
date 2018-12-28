@@ -1,20 +1,20 @@
 {{define "breadcrumb"}}
 	<li><a href="/balancers">Balancers</a></li>
 	<li><a href="/balancers/{{.Balancer.Id.Hex}}">{{.Balancer.Label}}</a></li>
-	<li><a href="#">Servers</a></li>
-	<li class="active">New</li>
+	<li><a href="#">服务器</a></li>
+	<li class="active">新建</li>
 {{end}}
 
 {{define "content"}}
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			New Server
+			服务器新建
 		</div>
 		<div class="panel-body">
 			<br>
 			<form method="POST" class="form-horizontal">
 				<div class="form-group">
-					<label for="inpLabel" class="col-sm-2 control-label">Label</label>
+					<label for="inpLabel" class="col-sm-2 control-label">标签</label>
 					<div class="col-sm-4">
 						<input type="text" name="label" class="form-control" id="inpLabel">
 					</div>
@@ -23,7 +23,7 @@
 				<br>
 
 				<div class="form-group">
-					<label for="inpAddress" class="col-sm-2 control-label">Address</label>
+					<label for="inpAddress" class="col-sm-2 control-label">地址</label>
 					<div class="col-sm-4">
 						<input type="text" name="settings.address" class="form-control" id="inpAddress">
 					</div>
@@ -33,8 +33,8 @@
 
 				<div class="form-group">
 					<div class="col-sm-offset-2 col-sm-10">
-						<button type="submit" class="btn btn-primary">Create</button>
-						<a href="/balancers/{{.Balancer.Id.Hex}}" class="btn btn-default">Cancel</a>
+						<button type="submit" class="btn btn-primary">创建</button>
+						<a href="/balancers/{{.Balancer.Id.Hex}}" class="btn btn-default">取消</a>
 					</div>
 				</div>
 			</form>

@@ -1,22 +1,22 @@
 {{define "breadcrumb"}}
 	{{$bal := .Server.Balancer}}
-	<li><a href="/balancers">Balancers</a></li>
+	<li><a href="/balancers">均衡器</a></li>
 	<li><a href="/balancers/{{$bal.Id.Hex}}">{{$bal.Label}}</a></li>
-	<li><a href="#">Servers</a></li>
+	<li><a href="#">服务器</a></li>
 	<li><a href="#">{{.Server.Label}}</a></li>
-	<li class="active">Edit</li>
+	<li class="active">编辑</li>
 {{end}}
 
 {{define "content"}}
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			Edit Server: {{.Server.Label}}
+			服务器编辑: {{.Server.Label}}
 		</div>
 		<div class="panel-body">
 			<br>
 			<form method="POST" class="form-horizontal">
 				<div class="form-group">
-					<label for="inpLabel" class="col-sm-2 control-label">Label</label>
+					<label for="inpLabel" class="col-sm-2 control-label">标签</label>
 					<div class="col-sm-4">
 						<input type="text" name="label" class="form-control" id="inpLabel" value="{{.Server.Label}}">
 					</div>
@@ -25,19 +25,19 @@
 				<br>
 
 				<div class="form-group">
-					<label for="inpAddress" class="col-sm-2 control-label">Address</label>
+					<label for="inpAddress" class="col-sm-2 control-label">地址</label>
 					<div class="col-sm-4">
 						<input type="text" name="settings.address" class="form-control" id="inpAddress" value="{{.Server.Settings.Address}}">
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="inpWeight" class="col-sm-2 control-label">Weight</label>
+					<label for="inpWeight" class="col-sm-2 control-label">权重</label>
 					<div class="col-sm-4">
 						<input type="number" name="settings.weight" class="form-control" id="inpWeight" value="{{.Server.Settings.Weight}}">
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="inpAvailability" class="col-sm-2 control-label">Availability</label>
+					<label for="inpAvailability" class="col-sm-2 control-label">可用性</label>
 					<div class="col-sm-4">
 						<select name="settings.availability" class="form-control" id="inpAvailability">
 							{{range $av := .Availabilities}}
@@ -51,8 +51,8 @@
 
 				<div class="form-group">
 					<div class="col-sm-offset-2 col-sm-10">
-						<button type="submit" class="btn btn-primary">Update</button>
-						<a href="/balancers/{{.Server.BalancerId.Hex}}" class="btn btn-default">Cancel</a>
+						<button type="submit" class="btn btn-primary">更新</button>
+						<a href="/balancers/{{.Server.BalancerId.Hex}}" class="btn btn-default">取消</a>
 					</div>
 				</div>
 			</form>
