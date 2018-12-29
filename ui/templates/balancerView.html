@@ -70,6 +70,13 @@
 					<dt>算法</dt>
 					<dd>{{.Balancer.Settings.Algorithm.Label}}</dd>
 				</dl>
+				<dl>
+					<dt>访问日志</dt>
+					<dd>
+						<a href="/balancers/{{.Balancer.Id.Hex}}/log/access" class="btn btn-default btn-xs">下载日志</a>
+						<a href="/balancers/{{.Balancer.Id.Hex}}/log/access" class="btn btn-default btn-xs">晴空日志</a>
+					</dd>
+				</dl>
 				<hr>
 				<a href="/balancers/{{.Balancer.Id.Hex}}/edit" class="btn btn-primary btn-xs">编辑</a>
 			</div>
