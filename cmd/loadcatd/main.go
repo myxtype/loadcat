@@ -10,12 +10,12 @@ import (
 	"os/signal"
 	"path/filepath"
 
-	"../../api"
-	"../../cfg"
-	"../../data"
-	"../../feline"
-	_ "../../feline/nginx"
-	"../../ui"
+	"github.com/myxtype/loadcat/api"
+	"github.com/myxtype/loadcat/cfg"
+	"github.com/myxtype/loadcat/data"
+	"github.com/myxtype/loadcat/feline"
+	_ "github.com/myxtype/loadcat/feline/nginx"
+	"github.com/myxtype/loadcat/ui"
 )
 
 func main() {
