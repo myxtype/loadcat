@@ -80,6 +80,10 @@ func HandleServerCreate(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, "/servers/"+srv.Id.Hex()+"/edit", http.StatusSeeOther)
 }
 
+func HandleServerDel(w http.ResponseWriter, r *http.Request) {
+
+}
+
 func ServeServer(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	if !bson.IsObjectIdHex(vars["id"]) {
@@ -197,4 +201,8 @@ func init() {
 		Methods("POST").
 		Path("/servers/{id}/edit").
 		Handler(http.HandlerFunc(HandleServerUpdate))
+	Router.NewRoute().
+		Methods("GET").
+		Path("/servers/{id}/del").
+		Handler(http.HandlerFunc(HandleServerDel))
 }
