@@ -3,28 +3,12 @@
 package ui
 
 import (
-	"fmt"
 	"html/template"
-	"os"
-	"os/exec"
-	"strings"
 )
-
-func GetCurrentPath() string {
-	s, err := exec.LookPath(os.Args[0])
-	if err != nil {
-		fmt.Println(err.Error())
-	}
-	s = strings.Replace(s, "\\", "/", -1)
-	s = strings.Replace(s, "\\\\", "/", -1)
-	i := strings.LastIndex(s, "/")
-	path := string(s[0 : i+1])
-	return path
-}
 
 var (
 
-	TplLayout = template.Must(template.New("layout.html").ParseFiles("ui/templates/layout.html"))
+	TplLayout = template.Must(template.ParseFiles("ui/templates/layout.html"))
 
 	TplBalancerList     = template.Must(template.Must(TplLayout.Clone()).ParseFiles("ui/templates/balancerList.html"))
 	TplBalancerNewForm  = template.Must(template.Must(TplLayout.Clone()).ParseFiles("ui/templates/balancerNewForm.html"))
