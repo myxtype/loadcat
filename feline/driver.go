@@ -3,7 +3,7 @@
 package feline
 
 import (
-	"../data"
+	"github.com/myxtype/loadcat/data"
 )
 
 type Driver interface {

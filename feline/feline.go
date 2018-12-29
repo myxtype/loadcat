@@ -7,8 +7,8 @@ import (
 	"path/filepath"
 	"sync"
 
-	"../cfg"
-	"../data"
+	"github.com/myxtype/loadcat/cfg"
+	"github.com/myxtype/loadcat/data"
 )
 
 type Feline struct {

@@ -12,9 +12,9 @@ import (
 
 	"github.com/coreos/go-systemd/dbus"
 
-	"../../cfg"
-	"../../data"
-	"../../feline"
+	"github.com/myxtype/loadcat/cfg"
+	"github.com/myxtype/loadcat/data"
+	"github.com/myxtype/loadcat/feline"
 )
 
 var TplNginxConf = template.Must(template.New("").Parse(`
