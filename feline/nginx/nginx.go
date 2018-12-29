@@ -23,6 +23,7 @@ upstream server_{{.Balancer.Id.Hex}} {
 
 	{{range $srv := .Balancer.Servers}}
 	server {{$srv.Settings.Address}} weight={{$srv.Settings.Weight}} {{if eq $srv.Settings.Availability "available"}}{{else if eq $srv.Settings.Availability "backup"}}backup{{else if eq $srv.Settings.Availability "unavailable"}}down{{end}};
+
 	{{end}}
 }
 
