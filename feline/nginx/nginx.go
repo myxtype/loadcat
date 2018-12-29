@@ -18,31 +18,19 @@ import (
 )
 
 var TplNginxConf = template.Must(template.New("").Parse(`
-upstream {{.Balancer.Id.Hex}} {
-	{{if eq .Balancer.Settings.Algorithm "least-connections"}}
-	least_conn;
-	{{else if eq .Balancer.Settings.Algorithm "source-ip"}}
-	ip_hash;
-	{{end}}
+upstream server_{{.Balancer.Id.Hex}} {
+	{{if eq .Balancer.Settings.Algorithm "least-connections"}}least_conn;{{else if eq .Balancer.Settings.Algorithm "source-ip"}}ip_hash;{{end}}
 
-	{{range $srv := .Balancer.Servers}}
-	server {{$srv.Settings.Address}} weight={{$srv.Settings.Weight}} {{if eq $srv.Settings.Availability "available"}}{{else if eq $srv.Settings.Availability "backup"}}backup{{else if eq $srv.Settings.Availability "unavailable"}}down{{end}};
-	{{end}}
+	{{range $srv := .Balancer.Servers}}server {{$srv.Settings.Address}} weight={{$srv.Settings.Weight}} {{if eq $srv.Settings.Availability "available"}}{{else if eq $srv.Settings.Availability "backup"}}backup{{else if eq $srv.Settings.Availability "unavailable"}}down{{end}};{{end}}
 }
 
 server {
-	{{if eq .Balancer.Settings.Protocol "http"}}
-	listen  {{.Balancer.Settings.Port}};
-	{{else if eq .Balancer.Settings.Protocol "https"}}
-	listen  {{.Balancer.Settings.Port}} ssl;
-	{{end}}
+	{{if eq .Balancer.Settings.Protocol "http"}}listen  {{.Balancer.Settings.Port}};{{else if eq .Balancer.Settings.Protocol "https"}}listen  {{.Balancer.Settings.Port}} ssl;{{end}}
 	server_name  {{.Balancer.Settings.Hostname}};
 
-	{{if eq .Balancer.Settings.Protocol "https"}}
-	ssl                  on;
+	{{if eq .Balancer.Settings.Protocol "https"}}ssl                  on;
 	ssl_certificate      {{.Dir}}/server.crt;
-	ssl_certificate_key  {{.Dir}}/server.key;
-	{{end}}
+	ssl_certificate_key  {{.Dir}}/server.key;{{end}}
 
 	location / {
 		proxy_set_header  Host $host;
@@ -50,7 +38,7 @@ server {
 		proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
 		proxy_set_header  X-Forwarded-Proto $scheme;
 
-		proxy_pass  http://{{.Balancer.Id.Hex}};
+		proxy_pass  http://server_{{.Balancer.Id.Hex}};
 
 		proxy_http_version  1.1;
 
