@@ -121,3 +121,13 @@ func (l *Balancer) Put() error {
 		return b.Put([]byte(l.Id.Hex()), p)
 	})
 }
+
+func (l *Balancer) Del() error {
+	if !l.Id.Valid() {
+		l.Id = bson.NewObjectId()
+	}
+	return DB.Update(func(tx *bolt.Tx) error {
+		b := tx.Bucket([]byte("balancers"))
+		return b.Delete([]byte(l.Id.Hex()))
+	})
+}

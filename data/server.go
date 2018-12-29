@@ -82,3 +82,14 @@ func (s *Server) Put() error {
 		return b.Put([]byte(s.Id.Hex()), p)
 	})
 }
+
+func (s *Server) Del() error {
+	if !s.Id.Valid() {
+		s.Id = bson.NewObjectId()
+	}
+	return DB.Update(func(tx *bolt.Tx) error {
+		b := tx.Bucket([]byte("servers"))
+		return b.Delete([]byte(s.Id.Hex()))
+		//return b.DeleteBucket([]byte(s.Id.Hex()))
+	})
+}

@@ -13,10 +13,11 @@
 				<thead>
 					<tr>
 						<th>均衡器</th>
-						<th>主机（域名）</th>
 						<th>协议</th>
+						<th>主机名（域名）</th>
 						<th>负载算法</th>
 						<th>状态</th>
+						<th>操作</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -25,10 +26,13 @@
 							<td>
 								<a href="/balancers/{{$bal.Id.Hex}}">{{$bal.Label}}</a>
 							</td>
-							<td>{{$bal.Settings.Hostname}}</td>
 							<td>{{$bal.Settings.Protocol.Label}}</td>
+							<td>{{$bal.Settings.Hostname}}</td>
 							<td>{{$bal.Settings.Algorithm.Label}}</td>
 							<td>-</td>
+							<td>
+								<a href="/balancers/{{$bal.Id.Hex}}/del" class="btn btn-danger btn-xs">删除</a>
+							</td>
 						</tr>
 					{{end}}
 				</tbody>

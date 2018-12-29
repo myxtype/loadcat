@@ -1,14 +1,14 @@
 {{define "breadcrumb"}}
 	<li><a href="/balancers">均衡器</a></li>
 	<li><a href="/balancers/{{.Balancer.Id.Hex}}">{{.Balancer.Label}}</a></li>
-	<li class="active">编辑</li>
+	<li class="active">删除</li>
 {{end}}
 
 {{define "content"}}
 	<div class="col-md-12">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				编辑均衡器：{{.Balancer.Label}}
+				删除均衡器：{{.Balancer.Label}}
 			</div>
 			<div class="panel-body">
 				<br>
@@ -16,7 +16,7 @@
 					<div class="form-group">
 						<label for="inpLabel" class="col-sm-2 control-label">标签</label>
 						<div class="col-sm-4">
-							<input type="text" name="label" class="form-control input-sm" id="inpLabel" value="{{.Balancer.Label}}">
+							<input type="text" name="label" class="form-control input-sm" id="inpLabel" value="{{.Balancer.Label}}" disabled>
 						</div>
 					</div>
 
@@ -25,19 +25,19 @@
 					<div class="form-group">
 						<label for="inpHostname" class="col-sm-2 control-label">主机名（域名）</label>
 						<div class="col-sm-4">
-							<input type="text" name="settings.hostname" class="form-control input-sm" id="inpHostname" value="{{.Balancer.Settings.Hostname}}">
+							<input type="text" name="settings.hostname" class="form-control input-sm" id="inpHostname" value="{{.Balancer.Settings.Hostname}}" disabled>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="inpPort" class="col-sm-2 control-label">端口</label>
 						<div class="col-sm-4">
-							<input type="number" name="settings.port" class="form-control input-sm" id="inpPort" value="{{.Balancer.Settings.Port}}">
+							<input type="number" name="settings.port" class="form-control input-sm" id="inpPort" value="{{.Balancer.Settings.Port}}" disabled>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="inpProtocol" class="col-sm-2 control-label">协议</label>
 						<div class="col-sm-4">
-							<select name="settings.protocol" class="form-control input-sm" id="inpProtocol">
+							<select name="settings.protocol" class="form-control input-sm" id="inpProtocol" disabled>
 								{{range $proto := .Protocols}}
 									<option value="{{$proto}}" {{if eq $proto $.Balancer.Settings.Protocol}}selected{{end}}>{{$proto.Label}}</option>
 								{{end}}
@@ -47,7 +47,7 @@
 					<div class="form-group">
 						<label for="inpAlgorithm" class="col-sm-2 control-label">负载算法</label>
 						<div class="col-sm-4">
-							<select name="settings.algorithm" class="form-control input-sm" id="inpAlgorithm">
+							<select name="settings.algorithm" class="form-control input-sm" id="inpAlgorithm" disabled>
 								{{range $algo := .Algorithms}}
 									<option value="{{$algo}}" {{if eq $algo $.Balancer.Settings.Algorithm}}selected{{end}}>{{$algo.Label}}</option>
 								{{end}}
@@ -61,7 +61,7 @@
 						<div class="form-group">
 							<label for="inpCipherSuite" class="col-sm-2 control-label">加密组件</label>
 							<div class="col-sm-4">
-								<select name="settings.ssl_options.cipher_suite" class="form-control input-sm" id="inpCipherSuite">
+								<select name="settings.ssl_options.cipher_suite" class="form-control input-sm" id="inpCipherSuite" disabled>
 									{{range $cs := .CipherSuites}}
 										<option value="{{$cs}}" {{if eq $cs $.Balancer.Settings.SSLOptions.CipherSuite}}selected{{end}}>{{$cs.Label}}</option>
 									{{end}}
@@ -73,7 +73,7 @@
 							{{if .Balancer.Settings.SSLOptions.Fingerprint}}
 								<div class="col-sm-4">
 									<input type="text" class="form-control" id="inpFingerprint" value="{{printf "% x" .Balancer.Settings.SSLOptions.Fingerprint}}" readonly>
-									<textarea name="settings.ssl_options.certificate" class="form-control {{if .Balancer.Settings.SSLOptions.Fingerprint}}hidden{{end}}" id="inpCertificate"  {{if .Balancer.Settings.SSLOptions.Fingerprint}}disabled{{end}}></textarea>
+									<textarea name="settings.ssl_options.certificate" class="form-control {{if .Balancer.Settings.SSLOptions.Fingerprint}}hidden{{end}}" id="inpCertificate" disabled></textarea>
 								</div>
 								<div class="col-sm-4">
 									<p class="form-control-static">
@@ -82,14 +82,14 @@
 								</div>
 							{{else}}
 								<div class="col-sm-4">
-									<textarea name="settings.ssl_options.certificate" class="form-control input-sm" id="inpCertificate"  {{if .Balancer.Settings.SSLOptions.Fingerprint}}disabled{{end}}></textarea>
+									<textarea name="settings.ssl_options.certificate" class="form-control input-sm" id="inpCertificate" disabled></textarea>
 								</div>
 							{{end}}
 						</div>
 						<div class="form-group {{if .Balancer.Settings.SSLOptions.Fingerprint}}hidden{{end}}">
 							<label for="inpPrivateKey" class="col-sm-2 control-label">私钥</label>
 							<div class="col-sm-4">
-								<textarea name="settings.ssl_options.private_key" class="form-control" id="inpPrivateKey" {{if .Balancer.Settings.SSLOptions.Fingerprint}}disabled{{end}}></textarea>
+								<textarea name="settings.ssl_options.private_key" class="form-control" id="inpPrivateKey" disabled></textarea>
 							</div>
 						</div>
 
@@ -98,7 +98,7 @@
 
 					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-10">
-							<button type="submit" class="btn btn-primary btn-sm">更新</button>
+							<button type="submit" class="btn btn-danger btn-sm">删除</button>
 							<a href="/balancers/{{.Balancer.Id.Hex}}" class="btn btn-default btn-sm">取消</a>
 						</div>
 					</div>

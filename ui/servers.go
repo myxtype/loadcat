@@ -80,8 +80,60 @@ func HandleServerCreate(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, "/servers/"+srv.Id.Hex()+"/edit", http.StatusSeeOther)
 }
 
-func HandleServerDel(w http.ResponseWriter, r *http.Request) {
+func HandleServerDelForm(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	if !bson.IsObjectIdHex(vars["id"]) {
+		http.Error(w, "Not Found", http.StatusNotFound)
+		return
+	}
+	srv, err := data.GetServer(bson.ObjectIdHex(vars["id"]))
+	if err != nil {
+		panic(err)
+	}
 
+	err = TplServerDelForm.Execute(w, struct {
+		Server         *data.Server
+		Availabilities []data.Availability
+	}{
+		Server:         srv,
+		Availabilities: data.Availabilities,
+	})
+	if err != nil {
+		panic(err)
+	}
+}
+
+func HandleServerDel(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	if !bson.IsObjectIdHex(vars["id"]) {
+		http.Error(w, "Not Found", http.StatusNotFound)
+		return
+	}
+	srv, err := data.GetServer(bson.ObjectIdHex(vars["id"]))
+	if err != nil {
+		panic(err)
+	}
+
+	err = r.ParseForm()
+	if err != nil {
+		http.Error(w, "Bad Request", http.StatusBadRequest)
+		return
+	}
+	err = srv.Del()
+	if err != nil {
+		panic(err)
+	}
+
+	bal, err := srv.Balancer()
+	if err != nil {
+		panic(err)
+	}
+	err = feline.Commit(bal)
+	if err != nil {
+		//panic(err)
+	}
+
+	http.Redirect(w, r, "/balancers/"+srv.BalancerId.Hex(), http.StatusSeeOther)
 }
 
 func ServeServer(w http.ResponseWriter, r *http.Request) {
@@ -95,14 +147,6 @@ func ServeServer(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 
-	// err = TplServerView.Execute(w, struct {
-	// 	Server *data.Server
-	// }{
-	// 	Server: srv,
-	// })
-	// if err != nil {
-	// 	panic(err)
-	// }
 	http.Redirect(w, r, "/servers/"+srv.Id.Hex()+"/edit", http.StatusSeeOther)
 }
 
@@ -203,6 +247,10 @@ func init() {
 		Handler(http.HandlerFunc(HandleServerUpdate))
 	Router.NewRoute().
 		Methods("GET").
+		Path("/servers/{id}/del").
+		Handler(http.HandlerFunc(HandleServerDelForm))
+	Router.NewRoute().
+		Methods("POST").
 		Path("/servers/{id}/del").
 		Handler(http.HandlerFunc(HandleServerDel))
 }

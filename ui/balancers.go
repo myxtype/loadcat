@@ -178,6 +178,57 @@ func HandleBalancerUpdate(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, "/balancers/"+bal.Id.Hex(), http.StatusSeeOther)
 }
 
+func ServeBalancerDelForm(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	if !bson.IsObjectIdHex(vars["id"]) {
+		http.Error(w, "Not Found", http.StatusNotFound)
+		return
+	}
+	bal, err := data.GetBalancer(bson.ObjectIdHex(vars["id"]))
+	if err != nil {
+		panic(err)
+	}
+
+	err = TplBalancerDelForm.Execute(w, struct {
+		Balancer     *data.Balancer
+		Protocols    []data.Protocol
+		Algorithms   []data.Algorithm
+		CipherSuites []data.CipherSuite
+	}{
+		Balancer:     bal,
+		Protocols:    data.Protocols,
+		Algorithms:   data.Algorithms,
+		CipherSuites: data.CipherSuites,
+	})
+	if err != nil {
+		panic(err)
+	}
+}
+
+func HandleBalancerDel(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	if !bson.IsObjectIdHex(vars["id"]) {
+		http.Error(w, "Not Found", http.StatusNotFound)
+		return
+	}
+	bal, err := data.GetBalancer(bson.ObjectIdHex(vars["id"]))
+	if err != nil {
+		panic(err)
+	}
+
+	err = feline.Remove(bal)
+	if err != nil {
+		panic(err)
+	}
+
+	err = bal.Del()
+	if err != nil {
+		panic(err)
+	}
+
+	http.Redirect(w, r, "/balancers", http.StatusSeeOther)
+}
+
 func init() {
 	Router.NewRoute().
 		Methods("GET").
@@ -203,4 +254,12 @@ func init() {
 		Methods("POST").
 		Path("/balancers/{id}/edit").
 		Handler(http.HandlerFunc(HandleBalancerUpdate))
+	Router.NewRoute().
+		Methods("GET").
+		Path("/balancers/{id}/del").
+		Handler(http.HandlerFunc(ServeBalancerDelForm))
+	Router.NewRoute().
+		Methods("POST").
+		Path("/balancers/{id}/del").
+		Handler(http.HandlerFunc(HandleBalancerDel))
 }

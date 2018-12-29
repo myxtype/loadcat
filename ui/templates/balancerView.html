@@ -25,7 +25,9 @@
 						{{range $srv := .Balancer.Servers}}
 							<tr>
 								<td>
-									<a href="/servers/{{$srv.Id.Hex}}">{{$srv.Label}}</a>
+									<a href="/servers/{{$srv.Id.Hex}}">
+										{{if eq $srv.Label ""}}-{{else}}{{$srv.Label}}{{end}}
+									</a>
 								</td>
 								<td>{{$srv.Settings.Address}}</td>
 								<td>{{$srv.Settings.Weight}}</td>
@@ -53,7 +55,7 @@
 			</div>
 			<div class="panel-body">
 				<dl>
-					<dt>主机名</dt>
+					<dt>主机名（域名）</dt>
 					<dd>{{.Balancer.Settings.Hostname}}</dd>
 				</dl>
 				<dl>

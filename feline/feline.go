@@ -3,6 +3,7 @@
 package feline
 
 import (
+	"fmt"
 	"os"
 	"path/filepath"
 	"sync"
@@ -64,6 +65,30 @@ func (f *Feline) Commit(bal *data.Balancer) error {
 	return nil
 }
 
+func (f *Feline) Remove(bal *data.Balancer) error {
+	f.Lock()
+	defer f.Unlock()
+
+	dir := filepath.Join(f.base, bal.Id.Hex())
+	_, err := os.Stat(dir)
+	if err == nil || os.IsExist(err) {
+		fmt.Println(dir)
+		err = os.RemoveAll(dir)
+		if (err != nil) {
+			return err
+		}
+	} else {
+		return nil
+	}
+
+	drv := Drivers[cfg.Current.Core.Driver]
+	err = drv.Reload()
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
 var DefaultFeline = New()
 
 func SetBase(dir string) error {
@@ -72,4 +97,8 @@ func SetBase(dir string) error {
 
 func Commit(bal *data.Balancer) error {
 	return DefaultFeline.Commit(bal)
+}
+
+func Remove(bal *data.Balancer) error {
+	return DefaultFeline.Remove(bal)
 }
