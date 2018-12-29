@@ -24,13 +24,13 @@ func GetCurrentPath() string {
 
 var (
 
-	TplLayout = template.Must(template.New("layout.html").ParseFiles(GetCurrentPath() + "templates/layout.html"))
+	TplLayout = template.Must(template.New("layout.html").ParseFiles("ui/templates/layout.html"))
 
-	TplBalancerList     = template.Must(template.Must(TplLayout.Clone()).ParseFiles(GetCurrentPath() + "templates/balancerList.html"))
-	TplBalancerNewForm  = template.Must(template.Must(TplLayout.Clone()).ParseFiles(GetCurrentPath() + "templates/balancerNewForm.html"))
-	TplBalancerView     = template.Must(template.Must(TplLayout.Clone()).ParseFiles(GetCurrentPath() + "templates/balancerView.html"))
-	TplBalancerEditForm = template.Must(template.Must(TplLayout.Clone()).ParseFiles(GetCurrentPath() + "templates/balancerEditForm.html"))
+	TplBalancerList     = template.Must(template.Must(TplLayout.Clone()).ParseFiles("ui/templates/balancerList.html"))
+	TplBalancerNewForm  = template.Must(template.Must(TplLayout.Clone()).ParseFiles("ui/templates/balancerNewForm.html"))
+	TplBalancerView     = template.Must(template.Must(TplLayout.Clone()).ParseFiles("ui/templates/balancerView.html"))
+	TplBalancerEditForm = template.Must(template.Must(TplLayout.Clone()).ParseFiles("ui/templates/balancerEditForm.html"))
 
-	TplServerNewForm  = template.Must(template.Must(TplLayout.Clone()).ParseFiles(GetCurrentPath() + "templates/serverNewForm.html"))
-	TplServerEditForm = template.Must(template.Must(TplLayout.Clone()).ParseFiles(GetCurrentPath() + "templates/serverEditForm.html"))
+	TplServerNewForm  = template.Must(template.Must(TplLayout.Clone()).ParseFiles("ui/templates/serverNewForm.html"))
+	TplServerEditForm = template.Must(template.Must(TplLayout.Clone()).ParseFiles("ui/templates/serverEditForm.html"))
 )

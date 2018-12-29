@@ -1,113 +1,111 @@
 {{define "breadcrumb"}}
-	<li><a href="/balancers">Balancers</a></li>
+	<li><a href="/balancers">均衡器</a></li>
 	<li><a href="/balancers/{{.Balancer.Id.Hex}}">{{.Balancer.Label}}</a></li>
-	<li class="active">Edit</li>
+	<li class="active">编辑</li>
 {{end}}
 
 {{define "content"}}
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			均衡器编辑: {{.Balancer.Label}}
-		</div>
-		<div class="panel-body">
-			<br>
-			<form method="POST" class="form-horizontal">
-				<div class="form-group">
-					<label for="inpLabel" class="col-sm-2 control-label">标签</label>
-					<div class="col-sm-4">
-						<input type="text" name="label" class="form-control" id="inpLabel" value="{{.Balancer.Label}}">
-					</div>
-				</div>
-
+	<div class="col-md-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				均衡器编辑: {{.Balancer.Label}}
+			</div>
+			<div class="panel-body">
 				<br>
-
-				<div class="form-group">
-					<label for="inpHostname" class="col-sm-2 control-label">主机名</label>
-					<div class="col-sm-4">
-						<input type="text" name="settings.hostname" class="form-control" id="inpHostname" value="{{.Balancer.Settings.Hostname}}">
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="inpPort" class="col-sm-2 control-label">端口</label>
-					<div class="col-sm-4">
-						<input type="number" name="settings.port" class="form-control" id="inpPort" value="{{.Balancer.Settings.Port}}">
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="inpProtocol" class="col-sm-2 control-label">协议</label>
-					<div class="col-sm-4">
-						<select name="settings.protocol" class="form-control" id="inpProtocol">
-							{{range $proto := .Protocols}}
-								<option value="{{$proto}}" {{if eq $proto $.Balancer.Settings.Protocol}}selected{{end}}>{{$proto.Label}}</option>
-							{{end}}
-						</select>
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="inpAlgorithm" class="col-sm-2 control-label">算法</label>
-					<div class="col-sm-4">
-						<select name="settings.algorithm" class="form-control" id="inpAlgorithm">
-							{{range $algo := .Algorithms}}
-								<option value="{{$algo}}" {{if eq $algo $.Balancer.Settings.Algorithm}}selected{{end}}>{{$algo.Label}}</option>
-							{{end}}
-						</select>
-					</div>
-				</div>
-
-				<br>
-
-				<fieldset id="setSSLOptions" class="hidden">
+				<form method="POST" class="form-horizontal">
 					<div class="form-group">
-						<label for="inpCipherSuite" class="col-sm-2 control-label">加密套件</label>
+						<label for="inpLabel" class="col-sm-2 control-label">标签</label>
 						<div class="col-sm-4">
-							<select name="settings.ssl_options.cipher_suite" class="form-control" id="inpCipherSuite">
-								{{range $cs := .CipherSuites}}
-									<option value="{{$cs}}" {{if eq $cs $.Balancer.Settings.SSLOptions.CipherSuite}}selected{{end}}>{{$cs.Label}}</option>
+							<input type="text" name="label" class="form-control input-sm" id="inpLabel" value="{{.Balancer.Label}}">
+						</div>
+					</div>
+
+					<br>
+
+					<div class="form-group">
+						<label for="inpHostname" class="col-sm-2 control-label">主机名（域名）</label>
+						<div class="col-sm-4">
+							<input type="text" name="settings.hostname" class="form-control input-sm" id="inpHostname" value="{{.Balancer.Settings.Hostname}}">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inpPort" class="col-sm-2 control-label">端口</label>
+						<div class="col-sm-4">
+							<input type="number" name="settings.port" class="form-control input-sm" id="inpPort" value="{{.Balancer.Settings.Port}}">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inpProtocol" class="col-sm-2 control-label">协议</label>
+						<div class="col-sm-4">
+							<select name="settings.protocol" class="form-control input-sm" id="inpProtocol">
+								{{range $proto := .Protocols}}
+									<option value="{{$proto}}" {{if eq $proto $.Balancer.Settings.Protocol}}selected{{end}}>{{$proto.Label}}</option>
 								{{end}}
 							</select>
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="inpCertificate" class="col-sm-2 control-label">证书</label>
-						{{if .Balancer.Settings.SSLOptions.Fingerprint}}
-							<div class="col-sm-4">
-								<input type="text" class="form-control" id="inpFingerprint" value="{{printf "% x" .Balancer.Settings.SSLOptions.Fingerprint}}" readonly>
-								<textarea name="settings.ssl_options.certificate" class="form-control {{if .Balancer.Settings.SSLOptions.Fingerprint}}hidden{{end}}" id="inpCertificate"  {{if .Balancer.Settings.SSLOptions.Fingerprint}}disabled{{end}}></textarea>
-							</div>
-							<div class="col-sm-4">
-								<p class="form-control-static">
-									<a href="#" id="btnReplaceCertificate">替换</a>
-								</p>
-							</div>
-						{{else}}
-							<div class="col-sm-4">
-								<textarea name="settings.ssl_options.certificate" class="form-control" id="inpCertificate"  {{if .Balancer.Settings.SSLOptions.Fingerprint}}disabled{{end}}></textarea>
-							</div>
-						{{end}}
-					</div>
-					<div class="form-group {{if .Balancer.Settings.SSLOptions.Fingerprint}}hidden{{end}}">
-						<label for="inpPrivateKey" class="col-sm-2 control-label">私钥</label>
+						<label for="inpAlgorithm" class="col-sm-2 control-label">负载算法</label>
 						<div class="col-sm-4">
-							<textarea name="settings.ssl_options.private_key" class="form-control" id="inpPrivateKey" {{if .Balancer.Settings.SSLOptions.Fingerprint}}disabled{{end}}></textarea>
+							<select name="settings.algorithm" class="form-control input-sm" id="inpAlgorithm">
+								{{range $algo := .Algorithms}}
+									<option value="{{$algo}}" {{if eq $algo $.Balancer.Settings.Algorithm}}selected{{end}}>{{$algo.Label}}</option>
+								{{end}}
+							</select>
 						</div>
 					</div>
 
 					<br>
-				</fieldset>
 
-				<div class="form-group">
-					<div class="col-sm-offset-2 col-sm-10">
-						<button type="submit" class="btn btn-primary">更新</button>
-						<a href="/balancers/{{.Balancer.Id.Hex}}" class="btn btn-default">取消</a>
+					<fieldset id="setSSLOptions" class="hidden">
+						<div class="form-group">
+							<label for="inpCipherSuite" class="col-sm-2 control-label">加密组件</label>
+							<div class="col-sm-4">
+								<select name="settings.ssl_options.cipher_suite" class="form-control input-sm" id="inpCipherSuite">
+									{{range $cs := .CipherSuites}}
+										<option value="{{$cs}}" {{if eq $cs $.Balancer.Settings.SSLOptions.CipherSuite}}selected{{end}}>{{$cs.Label}}</option>
+									{{end}}
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="inpCertificate" class="col-sm-2 control-label">证书</label>
+							{{if .Balancer.Settings.SSLOptions.Fingerprint}}
+								<div class="col-sm-4">
+									<input type="text" class="form-control" id="inpFingerprint" value="{{printf "% x" .Balancer.Settings.SSLOptions.Fingerprint}}" readonly>
+									<textarea name="settings.ssl_options.certificate" class="form-control {{if .Balancer.Settings.SSLOptions.Fingerprint}}hidden{{end}}" id="inpCertificate"  {{if .Balancer.Settings.SSLOptions.Fingerprint}}disabled{{end}}></textarea>
+								</div>
+								<div class="col-sm-4">
+									<p class="form-control-static">
+										<a href="#" id="btnReplaceCertificate">替换</a>
+									</p>
+								</div>
+							{{else}}
+								<div class="col-sm-4">
+									<textarea name="settings.ssl_options.certificate" class="form-control input-sm" id="inpCertificate"  {{if .Balancer.Settings.SSLOptions.Fingerprint}}disabled{{end}}></textarea>
+								</div>
+							{{end}}
+						</div>
+						<div class="form-group {{if .Balancer.Settings.SSLOptions.Fingerprint}}hidden{{end}}">
+							<label for="inpPrivateKey" class="col-sm-2 control-label">私钥</label>
+							<div class="col-sm-4">
+								<textarea name="settings.ssl_options.private_key" class="form-control" id="inpPrivateKey" {{if .Balancer.Settings.SSLOptions.Fingerprint}}disabled{{end}}></textarea>
+							</div>
+						</div>
+
+						<br>
+					</fieldset>
+
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-10">
+							<button type="submit" class="btn btn-primary btn-sm">更新</button>
+							<a href="/balancers/{{.Balancer.Id.Hex}}" class="btn btn-default btn-sm">取消</a>
+						</div>
 					</div>
-				</div>
-			</form>
+				</form>
+			</div>
 		</div>
 	</div>
-{{end}}
-
-{{define "sidebar"}}
-
 {{end}}
 
 {{define "scripts"}}

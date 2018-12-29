@@ -8,60 +8,58 @@
 {{end}}
 
 {{define "content"}}
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			服务器编辑: {{.Server.Label}}
-		</div>
-		<div class="panel-body">
-			<br>
-			<form method="POST" class="form-horizontal">
-				<div class="form-group">
-					<label for="inpLabel" class="col-sm-2 control-label">标签</label>
-					<div class="col-sm-4">
-						<input type="text" name="label" class="form-control" id="inpLabel" value="{{.Server.Label}}">
-					</div>
-				</div>
-
+	<div class="col-md-9">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				服务器编辑：{{.Server.Label}}
+			</div>
+			<div class="panel-body">
 				<br>
+				<form method="POST" class="form-horizontal">
+					<div class="form-group">
+						<label for="inpLabel" class="col-sm-2 control-label">标签</label>
+						<div class="col-sm-4">
+							<input type="text" name="label" class="form-control" id="inpLabel" value="{{.Server.Label}}">
+						</div>
+					</div>
 
-				<div class="form-group">
-					<label for="inpAddress" class="col-sm-2 control-label">地址</label>
-					<div class="col-sm-4">
-						<input type="text" name="settings.address" class="form-control" id="inpAddress" value="{{.Server.Settings.Address}}">
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="inpWeight" class="col-sm-2 control-label">权重</label>
-					<div class="col-sm-4">
-						<input type="number" name="settings.weight" class="form-control" id="inpWeight" value="{{.Server.Settings.Weight}}">
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="inpAvailability" class="col-sm-2 control-label">可用性</label>
-					<div class="col-sm-4">
-						<select name="settings.availability" class="form-control" id="inpAvailability">
-							{{range $av := .Availabilities}}
-								<option value="{{$av}}" {{if eq $av $.Server.Settings.Availability}}selected{{end}}>{{$av.Label}}</option>
-							{{end}}
-						</select>
-					</div>
-				</div>
+					<br>
 
-				<br>
-
-				<div class="form-group">
-					<div class="col-sm-offset-2 col-sm-10">
-						<button type="submit" class="btn btn-primary">更新</button>
-						<a href="/balancers/{{.Server.BalancerId.Hex}}" class="btn btn-default">取消</a>
+					<div class="form-group">
+						<label for="inpAddress" class="col-sm-2 control-label">地址</label>
+						<div class="col-sm-4">
+							<input type="text" name="settings.address" class="form-control" id="inpAddress" value="{{.Server.Settings.Address}}">
+						</div>
 					</div>
-				</div>
-			</form>
+					<div class="form-group">
+						<label for="inpWeight" class="col-sm-2 control-label">权重</label>
+						<div class="col-sm-4">
+							<input type="number" name="settings.weight" class="form-control" id="inpWeight" value="{{.Server.Settings.Weight}}">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inpAvailability" class="col-sm-2 control-label">可用性</label>
+						<div class="col-sm-4">
+							<select name="settings.availability" class="form-control" id="inpAvailability">
+								{{range $av := .Availabilities}}
+									<option value="{{$av}}" {{if eq $av $.Server.Settings.Availability}}selected{{end}}>{{$av.Label}}</option>
+								{{end}}
+							</select>
+						</div>
+					</div>
+
+					<br>
+
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-10">
+							<button type="submit" class="btn btn-primary">更新</button>
+							<a href="/balancers/{{.Server.BalancerId.Hex}}" class="btn btn-default">取消</a>
+						</div>
+					</div>
+				</form>
+			</div>
 		</div>
 	</div>
-{{end}}
-
-{{define "sidebar"}}
-
 {{end}}
 
 {{define "scripts"}}

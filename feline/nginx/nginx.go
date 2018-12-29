@@ -32,16 +32,16 @@ upstream {{.Balancer.Id.Hex}} {
 
 server {
 	{{if eq .Balancer.Settings.Protocol "http"}}
-		listen  {{.Balancer.Settings.Port}};
+	listen  {{.Balancer.Settings.Port}};
 	{{else if eq .Balancer.Settings.Protocol "https"}}
-		listen  {{.Balancer.Settings.Port}} ssl;
+	listen  {{.Balancer.Settings.Port}} ssl;
 	{{end}}
 	server_name  {{.Balancer.Settings.Hostname}};
 
 	{{if eq .Balancer.Settings.Protocol "https"}}
-		ssl                  on;
-		ssl_certificate      {{.Dir}}/server.crt;
-		ssl_certificate_key  {{.Dir}}/server.key;
+	ssl                  on;
+	ssl_certificate      {{.Dir}}/server.crt;
+	ssl_certificate_key  {{.Dir}}/server.key;
 	{{end}}
 
 	location / {

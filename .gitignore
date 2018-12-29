@@ -2,3 +2,4 @@
 loadcat.conf
 loadcat.db
 out/
+loadcat.db.lock

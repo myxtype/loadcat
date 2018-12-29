@@ -15,7 +15,7 @@ func (a Algorithm) Label() string {
 }
 
 var AlgorithmLabels = map[Algorithm]string{
-	"round-robin":       "Round-robin",
-	"least-connections": "Least Connections",
-	"source-ip":         "Source IP",
+	"round-robin":       "轮询",
+	"least-connections": "最小连接数",
+	"source-ip":         "源IP",
 }

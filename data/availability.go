@@ -15,7 +15,7 @@ func (a Availability) Label() string {
 }
 
 var AvailabilityLabels = map[Availability]string{
-	"unavailable": "Unavailable",
-	"available":   "Available",
-	"backup":      "Backup",
+	"unavailable": "不可用",
+	"available":   "可用",
+	"backup":      "备用",
 }

@@ -6,44 +6,42 @@
 {{end}}
 
 {{define "content"}}
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			服务器新建
-		</div>
-		<div class="panel-body">
-			<br>
-			<form method="POST" class="form-horizontal">
-				<div class="form-group">
-					<label for="inpLabel" class="col-sm-2 control-label">标签</label>
-					<div class="col-sm-4">
-						<input type="text" name="label" class="form-control" id="inpLabel">
-					</div>
-				</div>
-
+	<div class="col-md-9">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				服务器新建
+			</div>
+			<div class="panel-body">
 				<br>
-
-				<div class="form-group">
-					<label for="inpAddress" class="col-sm-2 control-label">地址</label>
-					<div class="col-sm-4">
-						<input type="text" name="settings.address" class="form-control" id="inpAddress">
+				<form method="POST" class="form-horizontal">
+					<div class="form-group">
+						<label for="inpLabel" class="col-sm-2 control-label">标签</label>
+						<div class="col-sm-4">
+							<input type="text" name="label" class="form-control input-sm" id="inpLabel">
+						</div>
 					</div>
-				</div>
 
-				<br>
+					<br>
 
-				<div class="form-group">
-					<div class="col-sm-offset-2 col-sm-10">
-						<button type="submit" class="btn btn-primary">创建</button>
-						<a href="/balancers/{{.Balancer.Id.Hex}}" class="btn btn-default">取消</a>
+					<div class="form-group">
+						<label for="inpAddress" class="col-sm-2 control-label">地址</label>
+						<div class="col-sm-4">
+							<input type="text" name="settings.address" class="form-control input-sm" id="inpAddress">
+						</div>
 					</div>
-				</div>
-			</form>
+
+					<br>
+
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-10">
+							<button type="submit" class="btn btn-primary btn-sm">创建</button>
+							<a href="/balancers/{{.Balancer.Id.Hex}}" class="btn btn-default btn-sm">取消</a>
+						</div>
+					</div>
+				</form>
+			</div>
 		</div>
 	</div>
-{{end}}
-
-{{define "sidebar"}}
-
 {{end}}
 
 {{define "scripts"}}
