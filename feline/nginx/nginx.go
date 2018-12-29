@@ -21,7 +21,9 @@ var TplNginxConf = template.Must(template.New("").Parse(`
 upstream server_{{.Balancer.Id.Hex}} {
 	{{if eq .Balancer.Settings.Algorithm "least-connections"}}least_conn;{{else if eq .Balancer.Settings.Algorithm "source-ip"}}ip_hash;{{end}}
 
-	{{range $srv := .Balancer.Servers}}server {{$srv.Settings.Address}} weight={{$srv.Settings.Weight}} {{if eq $srv.Settings.Availability "available"}}{{else if eq $srv.Settings.Availability "backup"}}backup{{else if eq $srv.Settings.Availability "unavailable"}}down{{end}};{{end}}
+	{{range $srv := .Balancer.Servers}}
+	server {{$srv.Settings.Address}} weight={{$srv.Settings.Weight}} {{if eq $srv.Settings.Availability "available"}}{{else if eq $srv.Settings.Availability "backup"}}backup{{else if eq $srv.Settings.Availability "unavailable"}}down{{end}};
+	{{end}}
 }
 
 server {
