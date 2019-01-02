@@ -3,7 +3,6 @@
 package feline
 
 import (
-	"fmt"
 	"os"
 	"path/filepath"
 	"sync"
@@ -72,7 +71,6 @@ func (f *Feline) Remove(bal *data.Balancer) error {
 	dir := filepath.Join(f.base, bal.Id.Hex())
 	_, err := os.Stat(dir)
 	if err == nil || os.IsExist(err) {
-		fmt.Println(dir)
 		err = os.RemoveAll(dir)
 		if (err != nil) {
 			return err
