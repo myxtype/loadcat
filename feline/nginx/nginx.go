@@ -57,6 +57,9 @@ server {
 		proxy_set_header  Upgrade $http_upgrade;
 		proxy_set_header  Connection 'upgrade';
 	}
+
+	access_log  {{.Dir}}/access.log;
+    error_log  {{.Dir}}/error.log;
 }
 `))
 
