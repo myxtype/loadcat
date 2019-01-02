@@ -1,25 +1,12 @@
 # Loadcat
 
-Loadcat is an Nginx configurator that allows you to use Nginx as a load balancer. The project is inspired by the various Nginx load balancing tutorial articles available online and also the existence of Linode's load balancer service [NodeBalancers](https://www.linode.com/nodebalancers). So far the tool covers some of HTTP and HTTPS load balancing features, such as SSL termination, adding servers on the fly, marking them as unavailable or backup as necessary, and setting their weights to distribute load fairly.
+loadcat是一个nginx配置程序，允许您使用nginx作为负载平衡器。这个项目的灵感来自于各种在线的nginx负载平衡教程文章，以及linode的负载平衡服务nodebalancers的存在。到目前为止，该工具涵盖了一些HTTP和HTTPS负载平衡功能，例如SSL终止、动态添加服务器、将它们标记为不可用或根据需要进行备份，以及设置它们的权重以公平地分配负载。
 
-## Installation
+## 安装
 
 ### Arch Linux
 
-Install Loadcat using a pre-built .pkg file:
-
-~~~
-$ wget https://github.com/hjr265/loadcat/releases/download/v0.1-alpha.1/loadcat-0.1_alpha.1-1-x86_64.pkg.tar.xz
-# pacman -U loadcat-0.1_alpha.1-1-x86_64.pkg.tar.xz
-~~~
-
-Or, from AUR using Yaourt:
-
-~~~
-$ yaourt loadcat
-~~~
-
-Or, manually:
+manually:
 
 ~~~
 $ git clone https://aur.archlinux.org/loadcat.git
@@ -33,21 +20,15 @@ $ makepkg
 Install Loadcat using the go get command:
 
 ```
-$ go get github.com/hjr265/loadcat/cmd/loadcatd
+$ go get github.com/myxtype/loadcat/cmd/loadcatd
 ```
 
-## Usage
-
-If you installed Loadcat using the distribution specific package, you can start it as a service using systemctl:
-
-```
-# systemctl start loadcat.service
-```
+## 使用
 
 If you installed Loadcat from source, you can launch it with:
 
 ```
-$ cd $GOPATH/src/github.com/hjr265/loadcat
+$ cd $GOPATH/src/github.com/myxtype/loadcat
 # $GOPATH/bin/loadcatd
 ```
 

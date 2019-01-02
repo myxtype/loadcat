@@ -59,7 +59,7 @@ server {
 	}
 
 	access_log  {{.Dir}}/access.log;
-    error_log  {{.Dir}}/error.log;
+	error_log  {{.Dir}}/error.log;
 }
 `))
 
