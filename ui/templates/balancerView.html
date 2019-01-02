@@ -56,7 +56,7 @@
 			<div class="panel-body">
 				<dl>
 					<dt>主机名（域名）</dt>
-					<dd>{{.Balancer.Settings.Hostname}}</dd>
+					<dd><a href="{{.Balancer.Settings.Hostname}}">{{.Balancer.Settings.Hostname}}</a></dd>
 				</dl>
 				<dl>
 					<dt>端口</dt>
@@ -69,13 +69,6 @@
 				<dl>
 					<dt>算法</dt>
 					<dd>{{.Balancer.Settings.Algorithm.Label}}</dd>
-				</dl>
-				<dl>
-					<dt>访问日志</dt>
-					<dd>
-						<a href="/balancers/{{.Balancer.Id.Hex}}/log/access" class="btn btn-default btn-xs">下载</a>
-						<a href="/balancers/{{.Balancer.Id.Hex}}/log/del" class="btn btn-default btn-xs">清空</a>
-					</dd>
 				</dl>
 				<hr>
 				<a href="/balancers/{{.Balancer.Id.Hex}}/edit" class="btn btn-primary btn-xs">编辑</a>
