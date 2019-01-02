@@ -27,12 +27,22 @@ upstream server_{{.Balancer.Id.Hex}} {
 }
 
 server {
-	{{if eq .Balancer.Settings.Protocol "http"}}listen  {{.Balancer.Settings.Port}};{{else if eq .Balancer.Settings.Protocol "https"}}listen  {{.Balancer.Settings.Port}} ssl;{{end}}
+	{{if eq .Balancer.Settings.Protocol "http"}}
+	listen  {{.Balancer.Settings.Port}};
+	{{else if eq .Balancer.Settings.Protocol "https"}}
+	listen  {{.Balancer.Settings.Port}} ssl;
+	{{end}}
 	server_name  {{.Balancer.Settings.Hostname}};
 
-	{{if eq .Balancer.Settings.Protocol "https"}}ssl                  on;
+	{{if eq .Balancer.Settings.Protocol "https"}}
+	ssl on;
 	ssl_certificate      {{.Dir}}/server.crt;
-	ssl_certificate_key  {{.Dir}}/server.key;{{end}}
+	ssl_certificate_key  {{.Dir}}/server.key;
+	ssl_session_cache shared:SSL:1m;
+	ssl_session_timeout  10m;
+	ssl_ciphers HIGH:!aNULL:!MD5;
+	ssl_prefer_server_ciphers on;
+	{{end}}
 
 	location / {
 		proxy_set_header  Host $host;
